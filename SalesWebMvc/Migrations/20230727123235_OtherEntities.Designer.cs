@@ -71,7 +71,7 @@ namespace SalesWebMvc.Migrations
                     b.Property<double>("BaseSalary")
                         .HasColumnType("double");
 
-                    b.Property<DateTime>("BithDate")
+                    b.Property<DateTime>("uDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("DepartmentId")
