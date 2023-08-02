@@ -1,4 +1,6 @@
-﻿using SalesWebMvc.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Data;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Services
@@ -15,6 +17,25 @@ namespace SalesWebMvc.Services
         public List<Seller> FindAll()
         {
             return _context.Seller.ToList();
+        }
+
+        public void Insert(Seller obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public Seller FindById(int id)
+        {
+            //O Método Include é utlizado para fazer o join na tabela de departamentos
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Seller.Find(id);
+            _context.Seller.Remove(obj);
+            _context.SaveChanges();
         }
     }
 }

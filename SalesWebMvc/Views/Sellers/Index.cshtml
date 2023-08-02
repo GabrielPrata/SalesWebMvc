@@ -6,8 +6,14 @@
     ViewData["Title"] = "Sellers";
 }
 
-<h2>@ViewData["Title"]</h2>
-
+<br />
+<div class="d-flex justify-content-between">
+    <h2>@ViewData["Title"]</h2>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+</div>
+<hr />
 <table class="table table-striped table-hover">
     <thead>
         <tr>
