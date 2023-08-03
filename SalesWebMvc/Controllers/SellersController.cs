@@ -43,6 +43,14 @@ namespace SalesWebMvc.Controllers
         //Este objeto vendedor vem através da requisição
         public IActionResult Create(Seller seller)
         {
+            //Para realizar as validações do lado do servidor:
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             _sellerService.Insert(seller);
 
             //Faço o redirecionamento para a tela Index
@@ -120,6 +128,13 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller) 
         {
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id Mismatch" });

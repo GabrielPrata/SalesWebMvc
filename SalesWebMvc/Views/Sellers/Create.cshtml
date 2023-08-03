@@ -10,29 +10,36 @@
     <div class="col-md-4">
         <!-- Este create refere-se ao método POST -->
         <form asp-action="Create">
+            <!-- Abaixo, validação por sumário. Um único espaço em minha página destinado a exibir as mensagens de erro -->
+            <!-- <div asp-validation-summary="All" class="text-danger"></div> -->
             <div class="form-group"
                 <label asp-for="Seller.Name" classs="control-label"></label>
                 <input asp-for="Seller.Name" class="form-control" />
+                <span asp-validation-for="Seller.Name" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group"
                 <label asp-for="Seller.Email" classs="control-label"></label>
                 <input asp-for="Seller.Email" class="form-control" />
+                <span asp-validation-for="Seller.Email" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group"
                 <label asp-for="Seller.BirthDate" classs="control-label"></label>
                 <input asp-for="Seller.BirthDate" class="form-control" />
+                <span asp-validation-for="Seller.BirthDate" class="text-danger"></span>
+
             </div>
             <br />
             <div class="form-group"
                 <label asp-for="Seller.BaseSalary" classs="control-label"></label>
                 <input asp-for="Seller.BaseSalary" class="form-control" />
+                <span asp-validation-for="Seller.BaseSalary" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
                 <label asp-for="Seller.DepartmentId" class="control-label"></label>
-                <!-- 
+                <!--
                     SelectList utiliza de 3 argumentos:
                     1- A fonte de dados da coleção
                     2- Qual atributo é a chave de cada elemento
@@ -48,3 +55,9 @@
     </div>
     <br />
 </div>
+<!-- Abaixo eu habilito as validações do lado do cliente, via JavaScript -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
