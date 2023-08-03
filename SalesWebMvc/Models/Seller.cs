@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SalesWebMvc.Models
 {
@@ -6,9 +7,23 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        //O framework pega o nome da classe para exibir no front. Usando a linha abaixo eu defino um nome para ser
+        //exibido ao invés do nome da classe. O DataType é utilizado para tirar as horas dos campos de data, deixando apenas dd/MM/yyyy
+        [Display(Name = "Birth Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
+
+        [Display(Name = "Base Salary")]
+        //Display format é para formatar o formato da string
+        //{0:F2} onde 0 indica o valor do atributo onde este atriburo terá a formatação F2 (duas casas decimais)
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double BaseSalary { get; set; }
+
         public Department Department { get; set; }
         public int DepartmentId { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
